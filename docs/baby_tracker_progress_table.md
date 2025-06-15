@@ -15,7 +15,7 @@
 | 2 | **Criar estrutura de pastas** | Seguir documento de arquitetura<br/>• Todos os diretórios<br/>• Arquivos README.md | 1 | 1 | 6,25% | 40min | 35min | ✅ **Concluído:** Estrutura criada sem problemas |
 | 3 | **Setup ambiente Flutter** | flutter create + Clean Architecture<br/>• Reestruturar pastas<br/>• pubspec.yaml | 1 | 1 | 6,25% | 30min | 30min | Concluído |
 | 4 | **Setup ambiente Python** | Ambiente virtual + FastAPI<br/>• requirements.txt<br/>• Teste "Hello World" | 1 | 1 | 6,25% | 20min | 20min | Concluído |
-| 5 | **Configurar PostgreSQL + SQLAlchemy** | Docker Compose<br/>• Docker Compose para PostgreSQL<br/>• database.py<br/>• Testar conexão | 2 | 2 | 6,25% | 45min | - | *Pendente* |
+| 5 | **Configurar PostgreSQL + SQLAlchemy** | Docker Compose<br/>• Docker Compose para PostgreSQL<br/>• database.py<br/>• Testar conexão | 2 | 2 | 6,25% | 45min | 45min | Concluído |
 | 6 | **Criar modelos do banco** | 4 modelos principais<br/>• User, Baby, Feeding, Sleep<br/>• Relacionamentos | 2 | 2 | 6,25% | 60min | - | Concluído|
 | 7 | **Configurar Alembic** | Sistema de migrations<br/>• Primeira migration<br/>• Executar no banco | 2 | - | 6,25% | 15min | - | *Pendente* |
 | 8 | **Sistema de autenticação JWT** | Sistema completo<br/>• security.py<br/>• schemas/user.py<br/>• auth.py (register/login) | 3 | - | 6,25% | 40min | - | *Pendente* |
@@ -33,7 +33,7 @@
 ## 📈 Estatísticas do Projeto
 
 ### **Progresso Geral**
-- **Tarefas concluídas:** 4/16 (25%)
+- **Tarefas concluídas:** 5/16 (31.3%)
 - **Tempo investido:** 57min de 600min totais (9,5%)
 - **Dias trabalhados:** 1/5 dias
 - **Eficiência:** -13min (tarefas concluídas 13min mais rápido que o planejado)
