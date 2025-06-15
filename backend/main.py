@@ -7,7 +7,7 @@ from app.core.database import engine, Base
 
 # Criar as tabelas automaticamente (apenas para desenvolvimento)
 # Em produção, use Alembic para migrations
-Base.metadata.create_all(bind=engine)
+#Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="Baby Tracker API", 
