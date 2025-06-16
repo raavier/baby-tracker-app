@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baby Tracker - Knowledge Hub Completo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            height: 8px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            height: 100%;
+            width: 37.5%;
+            border-radius: 10px;
+            animation: progressAnimation 2s ease-out;
+        }
+
+        @keyframes progressAnimation {
+            from { width: 0%; }
+            to { width: 37.5%; }
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* ===== NAVEGAÇÃO POR TABS PURO CSS ===== */
+        .tab-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .tab-nav input[type="radio"] {
+            display: none;
+        }
+
+        .tab-container > input[type="radio"] {
+            display: none;
+        }
+
+        .tab-nav label {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            user-select: none;
+        }
+
+        .tab-nav label:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .tab-container > input[type="radio"]:checked + .tab-nav label[for] {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(240, 147, 251, 0.4);
+        }
+
+        /* Corrigir seletores para labels específicos */
+        .tab-container > #overview:checked ~ .tab-nav label[for="overview"],
+        .tab-container > #architecture:checked ~ .tab-nav label[for="architecture"],
+        .tab-container > #frontend:checked ~ .tab-nav label[for="frontend"],
+        .tab-container > #backend:checked ~ .tab-nav label[for="backend"],
+        .tab-container > #database:checked ~ .tab-nav label[for="database"],
+        .tab-container > #devops:checked ~ .tab-nav label[for="devops"],
+        .tab-container > #progress:checked ~ .tab-nav label[for="progress"],
+        .tab-container > #learnings:checked ~ .tab-nav label[for="learnings"] {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(240, 147, 251, 0.4);
+        }
+
+        .tab-content {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #overview:checked ~ .tab-contents .overview,
+        #architecture:checked ~ .tab-contents .architecture,
+        #frontend:checked ~ .tab-contents .frontend,
+        #backend:checked ~ .tab-contents .backend,
+        #database:checked ~ .tab-contents .database,
+        #devops:checked ~ .tab-contents .devops,
+        #progress:checked ~ .tab-contents .progress,
+        #learnings:checked ~ .tab-contents .learnings {
+            display: block;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section h3 {
+            font-size: 1.8rem;
+            margin: 25px 0 15px;
+            color: #444;
+            border-left: 4px solid #667eea;
+            padding-left: 15px;
+        }
+
+        .section h4 {
+            font-size: 1.4rem;
+            margin: 20px 0 10px;
+            color: #555;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            position: relative;
+            border: 1px solid #3c3c3c;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .code-block::before {
+            content: attr(data-lang);
+            position: absolute;
+            top: 8px;
+            right: 15px;
+            color: #858585;
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: bold;
+            background: rgba(60, 60, 60, 0.8);
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid #555;
+        }
+
+        /* Syntax highlighting básico mas efetivo */
+        .code-block.python {
+            color: #d4d4d4;
+        }
+
+        .code-block.dart {
+            color: #d4d4d4;
+        }
+
+        .code-block.yaml {
+            color: #d4d4d4;
+        }
+
+        .code-block.bash {
+            color: #d4d4d4;
+        }
+
+        /* Destacar comentários com cor diferente */
+        .code-block {
+            /* Usar regex CSS não funciona, então vamos fazer mais simples */
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .tech-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tech-card h4 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .feature-list {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .database-schema {
+            background: #e8f5e8;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 5px solid #4CAF50;
+        }
+
+        .emoji {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        .architecture-diagram {
+            background: #f0f4f8;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .flow-step {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin: 5px;
+            position: relative;
+        }
+
+        .flow-step::after {
+            content: '→';
+            position: absolute;
+            right: -15px;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .flow-step:last-child::after {
+            display: none;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #667eea;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -22px;
+            top: 20px;
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+        }
+
+        .completed {
+            background: #d4edda !important;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .pending {
+            background: #fff3cd !important;
+            border-left: 4px solid #ffc107;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .tab-nav {
+                flex-direction: column;
+            }
+            
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍼 Baby Tracker Knowledge Hub</h1>
+            <p>Guia Completo de Conceitos, Tecnologias e Arquitetura</p>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">6/16</div>
+                    <div class="stat-label">Tarefas Concluídas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">37.5%</div>
+                    <div class="stat-label">Progresso</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">212min</div>
+                    <div class="stat-label">Tempo Investido</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Tecnologias</div>
+                </div>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+
+        <div class="tab-container">
+            <!-- Radio buttons FORA do .tab-nav para que o seletor ~ funcione -->
+            <input type="radio" id="overview" name="tab" checked>
+            <input type="radio" id="architecture" name="tab">
+            <input type="radio" id="frontend" name="tab">
+            <input type="radio" id="backend" name="tab">
+            <input type="radio" id="database" name="tab">
+            <input type="radio" id="devops" name="tab">
+            <input type="radio" id="progress" name="tab">
+            <input type="radio" id="learnings" name="tab">
+            
+            <div class="tab-nav">
+                <label for="overview">📋 Visão Geral</label>
+                <label for="architecture">🏗️ Arquitetura</label>
+                <label for="frontend">📱 Frontend</label>
+                <label for="backend">🐍 Backend</label>
+                <label for="database">🗃️ Banco de Dados</label>
+                <label for="devops">🐳 DevOps</label>
+                <label for="progress">📈 Progresso</label>
+                <label for="learnings">🎓 Aprendizados</label>
+            </div>
+
+            <div class="tab-contents">
+                <!-- Overview Section -->
+                <div class="tab-content overview section">
+                    <h2>📋 Visão Geral do Projeto</h2>
+                    
+                    <div class="highlight">
+                        <h3>🎯 Objetivo Principal</h3>
+                        <p>Criar um aplicativo Flutter para registro diário de informações do bebê, incluindo amamentação, sono, fraldas e fotos, com backend FastAPI e banco PostgreSQL.</p>
+                    </div>
+
+                    <h3>🏆 O que já construímos</h3>
+                    <div class="feature-list">
+                        <p><span class="emoji">✅</span> <strong>Repositório GitHub</strong> - Estrutura completa configurada</p>
+                        <p><span class="emoji">✅</span> <strong>Flutter App</strong> - Base do aplicativo criada com Clean Architecture</p>
+                        <p><span class="emoji">✅</span> <strong>FastAPI Backend</strong> - API rodando localmente</p>
+                        <p><span class="emoji">✅</span> <strong>PostgreSQL Database</strong> - Banco configurado via Docker</p>
+                        <p><span class="emoji">✅</span> <strong>6 Modelos SQLAlchemy</strong> - User, Baby, Feeding, Sleep, Photo, Diaper</p>
+                        <p><span class="emoji">✅</span> <strong>Sistema de Relacionamentos</strong> - Estrutura 1:N implementada</p>
+                    </div>
+
+                    <h3>🎨 Stack Tecnológica Completa</h3>
+                    <div class="tech-grid">
+                        <div class="tech-card">
+                            <h4>📱 Frontend Mobile</h4>
+                            <p><strong>Flutter 3.16+</strong> - Framework multiplataforma</p>
+                            <p><strong>Dart</strong> - Linguagem principal</p>
+                            <p><strong>Clean Architecture</strong> - Separação de responsabilidades</p>
+                        </div>
+                        <div class="tech-card">
+                            <h4>🐍 Backend API</h4>
+                            <p><strong>FastAPI</strong> - Framework web moderno</p>
+                            <p><strong>Python 3.9+</strong> - Linguagem backend</p>
+                            <p><strong>SQLAlchemy</strong> - ORM para banco de dados</p>
+                        </div>
+                        <div class="tech-card">
+                            <h4>🗃️ Banco de Dados</h4>
+                            <p><strong>PostgreSQL 15</strong> - Banco relacional</p>
+                            <p><strong>Alembic</strong> - Sistema de migrations</p>
+                            <p><strong>pgAdmin</strong> - Interface gráfica</p>
+                        </div>
+                        <div class="tech-card">
+                            <h4>🐳 Infrastructure</h4>
+                            <p><strong>Docker Compose</strong> - Orquestração</p>
+                            <p><strong>AWS S3</strong> - Armazenamento fotos</p>
+                            <p><strong>Nginx</strong> - Proxy reverso</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Architecture Section -->
+                <div class="tab-content architecture section">
+                    <h2>🏗️ Arquitetura do Sistema</h2>
+
+                    <h3>📐 Clean Architecture no Flutter</h3>
+                    <div class="architecture-diagram">
+                        <div class="flow-step">presentation/</div>
+                        <div class="flow-step">domain/</div>
+                        <div class="flow-step">data/</div>
+                        <div class="flow-step">core/</div>
+                    </div>
+                    
+                    <div class="code-block" data-lang="Directory Structure">
+frontend/lib/
+├── app/                    # Configuração geral
+│   ├── routes/            # Navegação
+│   ├── themes/            # Temas e estilos
+│   └── config/            # Configurações
+├── core/                  # Funcionalidades base
+│   ├── constants/         # Constantes
+│   ├── utils/             # Utilitários
+│   ├── errors/            # Tratamento de erros
+│   └── network/           # Configuração HTTP
+├── features/              # Funcionalidades por domínio
+│   ├── auth/              # Autenticação
+│   ├── feeding/           # Amamentação
+│   ├── sleep/             # Sono
+│   ├── photos/            # Fotos
+│   └── dashboard/         # Dashboard
+└── shared/                # Componentes reutilizáveis
+    ├── widgets/           # Widgets customizados
+    ├── models/            # Modelos de dados
+    └── services/          # Serviços compartilhados
+                    </div>
+
+                    <h3>🔄 Fluxo de Dados Completo</h3>
+                    <div class="architecture-diagram">
+                        <div class="flow-step">Flutter UI</div>
+                        <div class="flow-step">HTTP Client</div>
+                        <div class="flow-step">FastAPI</div>
+                        <div class="flow-step">SQLAlchemy</div>
+                        <div class="flow-step">PostgreSQL</div>
+                    </div>
+
+                    <h3>🎯 Padrões Arquiteturais Aplicados</h3>
+                    <div class="feature-list">
+                        <p><span class="emoji">🏛️</span> <strong>Clean Architecture</strong> - Separação clara de responsabilidades</p>
+                        <p><span class="emoji">🔄</span> <strong>Repository Pattern</strong> - Abstração do acesso a dados</p>
+                        <p><span class="emoji">🎭</span> <strong>Provider/Riverpod</strong> - Gerenciamento de estado</p>
+                        <p><span class="emoji">📦</span> <strong>Dependency Injection</strong> - Inversão de dependências</p>
+                        <p><span class="emoji">🚦</span> <strong>Use Cases</strong> - Regras de negócio isoladas</p>
+                    </div>
+                </div>
+
+                <!-- Frontend Section -->
+                <div class="tab-content frontend section">
+                    <h2>📱 Frontend - Flutter</h2>
+
+                    <h3>🎨 Tecnologias e Bibliotecas</h3>
+                    <div class="tech-grid">
+                        <div class="tech-card">
+                            <h4>📦 Dependências Principais</h4>
+                            <p><strong>cupertino_icons ^1.0.8</strong> - Ícones iOS</p>
+                            <p><strong>http/dio</strong> - Cliente HTTP</p>
+                            <p><strong>provider/riverpod</strong> - Estado</p>
+                            <p><strong>image_picker</strong> - Câmera</p>
+                        </div>
+                        <div class="tech-card">
+                            <h4>🎭 Gerenciamento de Estado</h4>
+                            <p><strong>Provider</strong> - Estado simples</p>
+                            <p><strong>Riverpod</strong> - Estado avançado</p>
+                            <p><strong>StateNotifier</strong> - Estados complexos</p>
+                        </div>
+                    </div>
+
+                    <h3>📱 Estrutura de Features</h3>
+                    <div class="code-block" data-lang="Flutter Features">
+features/
+├── auth/
+│   ├── data/              # AuthService, AuthRepository
+│   ├── domain/            # User entity, Auth use cases
+│   └── presentation/      # LoginPage, RegisterPage
+├── feeding/
+│   ├── data/              # FeedingService
+│   ├── domain/            # Feeding entity
+│   └── presentation/      # FeedingForm, FeedingList
+├── sleep/
+│   ├── data/              # SleepService
+│   ├── domain/            # Sleep entity
+│   └── presentation/      # SleepTracker, SleepHistory
+└── dashboard/
+    ├── data/              # StatsService
+    ├── domain/            # Dashboard entities
+    └── presentation/      # HomePage, StatsCards
+                    </div>
+
+                    <h3>🎯 Funcionalidades Planejadas</h3>
+                    <div class="feature-list">
+                        <p><span class="emoji">🔐</span> <strong>Sistema de Autenticação</strong> - Login/Registro com JWT</p>
+                        <p><span class="emoji">🍼</span> <strong>Registro de Amamentação</strong> - Timer, lado do seio, observações</p>
+                        <p><span class="emoji">😴</span> <strong>Controle de Sono</strong> - Início/fim, qualidade, duração</p>
+                        <p><span class="emoji">📷</span> <strong>Galeria de Fotos</strong> - Upload S3, marcos importantes</p>
+                        <p><span class="emoji">📊</span> <strong>Dashboard Interativo</strong> - Gráficos, estatísticas</p>
+                        <p><span class="emoji">🔔</span> <strong>Notificações</strong> - Lembretes personalizados</p>
+                    </div>
+
+                    <h3>📱 Exemplo de Widget - Feeding Form</h3>
+                    <div class="code-block" data-lang="Dart">
+class FeedingForm extends StatefulWidget {
+  @override
+  _FeedingFormState createState() => _FeedingFormState();
+}
+
+class _FeedingFormState extends State&lt;FeedingForm&gt; {
+  FeedingType _selectedType = FeedingType.breastfeeding;
+  BreastSide _selectedSide = BreastSide.left;
+  DateTime _startTime = DateTime.now();
+  DateTime? _endTime;
+  bool _isFeeding = false;
+  
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: [
+            // Tipo de alimentação
+            DropdownButton&lt;FeedingType&gt;(
+              value: _selectedType,
+              onChanged: (type) => setState(() => _selectedType = type!),
+              items: FeedingType.values.map((type) => 
+                DropdownMenuItem(
+                  value: type,
+                  child: Text(type.displayName),
+                ),
+              ).toList(),
+            ),
+            
+            // Timer para amamentação
+            if (_selectedType == FeedingType.breastfeeding)
+              FeedingTimer(
+                isRunning: _isFeeding,
+                startTime: _startTime,
+                onStart: () => setState(() => _isFeeding = true),
+                onStop: () => setState(() => _isFeeding = false),
+              ),
+              
+            // Botão salvar
+            ElevatedButton(
+              onPressed: _saveFeedin,
+              child: Text('Salvar Registro'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+                    </div>
+                </div>
+
+                <!-- Backend Section -->
+                <div class="tab-content backend section">
+                    <h2>🐍 Backend - FastAPI</h2>
+
+                    <h3>⚡ Por que FastAPI?</h3>
+                    <div class="highlight">
+                        <p><strong>FastAPI</strong> foi escolhido por ser um framework moderno, rápido e com documentação automática. Oferece type hints nativos, validação automática e performance excepcional comparável ao NodeJS.</p>
+                    </div>
+
+                    <h3>📦 Estrutura do Backend</h3>
+                    <div class="code-block" data-lang="Python Structure">
+backend/
+├── main.py                # Entry point da aplicação
+├── requirements.txt       # Dependências
+├── app/
+│   ├── api/              # Endpoints REST
+│   │   ├── deps.py       # Dependências comuns
+│   │   └── v1/           # Versão 1 da API
+│   │       ├── auth.py   # Autenticação
+│   │       ├── feeding.py # CRUD Amamentação
+│   │       ├── sleep.py  # CRUD Sono
+│   │       └── photos.py # Upload fotos
+│   ├── core/             # Configurações centrais
+│   │   ├── database.py   # Conexão PostgreSQL
+│   │   ├── security.py   # JWT e hashing
+│   │   └── config.py     # Variáveis ambiente
+│   ├── models/           # Modelos SQLAlchemy
+│   ├── schemas/          # Pydantic schemas
+│   └── services/         # Lógica de negócio
+├── alembic/              # Database migrations
+└── tests/                # Testes automatizados
+                    </div>
+
+                    <h3>🔧 Dependências Principais</h3>
+                    <div class="code-block" data-lang="Requirements">
+fastapi==0.104.1          # Framework web principal
+uvicorn[standard]==0.24.0 # Servidor ASGI
+sqlalchemy==2.0.23        # ORM banco de dados
+alembic==1.12.1           # Sistema de migrations
+psycopg2-binary==2.9.7    # Driver PostgreSQL
+pydantic==2.5.0           # Validação de dados
+python-jose[cryptography]==3.3.0  # JWT tokens
+passlib[bcrypt]==1.7.4    # Hash de senhas
+python-multipart==0.0.6   # Upload de arquivos
+python-dotenv==1.0.0      # Variáveis de ambiente
+                    </div>
+
+                    <h3>🚀 Exemplo - API Endpoint</h3>
+                    <div class="code-block" data-lang="Python">
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.orm import Session
+from app.core.database import get_db
+from app.models.feeding import Feeding
+from app.schemas.feeding import FeedingCreate, FeedingResponse
+
+router = APIRouter(prefix="/api/v1/feeding", tags=["feeding"])
+
+@router.post("/", response_model=FeedingResponse)
+async def create_feeding(
+    feeding_data: FeedingCreate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """
+    Criar novo registro de amamentação
+    
+    - **feeding_type**: Tipo de alimentação (breast, bottle, solid)
+    - **start_time**: Horário de início
+    - **end_time**: Horário de fim (opcional)
+    - **breast_side**: Lado do seio (se amamentação)
+    """
+    
+    # Buscar bebê do usuário
+    baby = db.query(Baby).filter(
+        Baby.id == feeding_data.baby_id,
+        Baby.user_id == current_user.id
+    ).first()
+    
+    if not baby:
+        raise HTTPException(
+            status_code=404,
+            detail="Bebê não encontrado"
+        )
+    
+    # Criar registro
+    feeding = Feeding(**feeding_data.dict())
+    db.add(feeding)
+    db.commit()
+    db.refresh(feeding)
+    
+    return feeding
+                    </div>
+
+                    <h3>🔒 Sistema de Autenticação JWT</h3>
+                    <div class="code-block" data-lang="Python">
+from passlib.context import CryptContext
+from jose import JWTError, jwt
+from datetime import datetime, timedelta
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+SECRET_KEY = "sua-chave-secreta-super-segura"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
+
+def create_access_token(data: dict):
+    """Criar token JWT para autenticação"""
+    to_encode = data.copy()
+    expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    to_encode.update({"exp": expire})
+    
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    return encoded_jwt
+
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    """Verificar senha usando bcrypt"""
+    return pwd_context.verify(plain_password, hashed_password)
+
+def get_password_hash(password: str) -> str:
+    """Gerar hash da senha"""
+    return pwd_context.hash(password)
+                    </div>
+                </div>
+
+                <!-- Database Section -->
+                <div class="tab-content database section">
+                    <h2>🗃️ Banco de Dados PostgreSQL</h2>
+
+                    <h3>🏗️ Modelos SQLAlchemy Implementados</h3>
+                    <div class="database-schema">
+                        <h4>📊 Estrutura Completa do Banco</h4>
+                        <p><strong>6 Tabelas Principais:</strong> users, babies, feedings, sleep_records, photos, diaper_changes</p>
+                        <p><strong>8 ENUMs Customizados:</strong> Para tipos específicos do domínio</p>
+                        <p><strong>Relacionamentos 1:N:</strong> User → Baby → Feeding/Sleep/Photo/Diaper</p>
+                    </div>
+
+                    <h3>👤 Modelo User</h3>
+                    <div class="code-block" data-lang="Python">
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String(255), unique=True, index=True, nullable=False)
+    username = Column(String(100), unique=True, index=True, nullable=False)
+    full_name = Column(String(255), nullable=False)
+    hashed_password = Column(String(255), nullable=False)
+    is_active = Column(Boolean, default=True)
+    is_verified = Column(Boolean, default=False)
+    
+    # Timestamps automáticos
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+    
+    # Relacionamento 1:N com bebês
+    babies = relationship("Baby", back_populates="user", cascade="all, delete-orphan")
+                    </div>
+
+                    <h3>🍼 Modelo Feeding com ENUMs</h3>
+                    <div class="code-block" data-lang="Python">
+class FeedingTypeEnum(enum.Enum):
+    BREASTFEEDING = "breastfeeding"  # Amamentação
+    BOTTLE = "bottle"                # Mamadeira  
+    SOLID_FOOD = "solid_food"        # Comida sólida
+
+class BreastSideEnum(enum.Enum):
+    LEFT = "left"    # Seio esquerdo
+    RIGHT = "right"  # Seio direito
+    BOTH = "both"    # Ambos os seios
+
+class Feeding(Base):
+    __tablename__ = "feedings"
+
+    id = Column(Integer, primary_key=True, index=True)
+    feeding_type = Column(Enum(FeedingTypeEnum), nullable=False)
+    start_time = Column(DateTime(timezone=True), nullable=False)
+    end_time = Column(DateTime(timezone=True), nullable=True)
+    breast_side = Column(Enum(BreastSideEnum), nullable=True)
+    bottle_amount = Column(Float, nullable=True)  # ml
+    food_description = Column(String(500), nullable=True)
+    notes = Column(Text, nullable=True)
+    baby_id = Column(Integer, ForeignKey("babies.id"), nullable=False)
+    
+    # Propriedade calculada
+    @property
+    def duration_minutes(self):
+        if self.start_time and self.end_time:
+            delta = self.end_time - self.start_time
+            return int(delta.total_seconds() / 60)
+        return None
+                    </div>
+
+                    <h3>😴 Modelo Sleep com Qualidade</h3>
+                    <div class="code-block" data-lang="Python">
+class SleepQualityEnum(enum.Enum):
+    EXCELLENT = "excellent"      # 5⭐ Excelente
+    GOOD = "good"               # 4⭐ Bom
+    AVERAGE = "average"         # 3⭐ Médio  
+    POOR = "poor"              # 2⭐ Ruim
+    VERY_POOR = "very_poor"    # 1⭐ Muito ruim
+
+class Sleep(Base):
+    __tablename__ = "sleep_records"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    sleep_start = Column(DateTime(timezone=True), nullable=False)
+    sleep_end = Column(DateTime(timezone=True), nullable=True)
+    sleep_type = Column(Enum(SleepTypeEnum), nullable=False)
+    sleep_quality = Column(Enum(SleepQualityEnum), nullable=True)
+    baby_id = Column(Integer, ForeignKey("babies.id"), nullable=False)
+    
+    @property
+    def duration_hours(self):
+        """Duração formatada: 2h 30m"""
+        minutes = self.duration_minutes
+        if minutes:
+            hours = minutes // 60
+            mins = minutes % 60
+            return f"{hours}h {mins}m"
+        return None
+    
+    @property
+    def is_active(self):
+        """Sono em andamento (sem hora fim)"""
+        return self.sleep_end is None
+                    </div>
+
+                    <h3>📷 Modelo Photo com S3</h3>
+                    <div class="code-block" data-lang="Python">
+class Photo(Base):
+    __tablename__ = "photos"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    filename = Column(String(255), nullable=False)
+    original_filename = Column(String(255), nullable=False)
+    s3_url = Column(String(500), nullable=False)  # URL completa S3
+    s3_key = Column(String(500), nullable=False)  # Chave do arquivo
+    file_size = Column(Integer, nullable=True)    # Bytes
+    content_type = Column(String(100), default="image/jpeg")
+    width = Column(Integer, nullable=True)
+    height = Column(Integer, nullable=True)
+    caption = Column(Text, nullable=True)
+    is_milestone = Column(Boolean, default=False)
+    milestone_description = Column(String(500), nullable=True)
+    photo_taken_at = Column(DateTime(timezone=True), nullable=True)
+    baby_id = Column(Integer, ForeignKey("babies.id"), nullable=False)
+    
+    @property
+    def file_size_mb(self):
+        """Tamanho em MB"""
+        if self.file_size:
+            return round(self.file_size / (1024 * 1024), 2)
+        return None
+                    </div>
+
+                    <h3>🐳 Docker Compose Setup</h3>
+                    <div class="code-block" data-lang="YAML">
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  db:
+    image: postgres:15-alpine
+    container_name: baby_tracker_db
+    environment:
+      POSTGRES_DB: baby_tracker
+      POSTGRES_USER: baby_user
+      POSTGRES_PASSWORD: baby_password123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U baby_user -d baby_tracker"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # pgAdmin Interface
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: baby_tracker_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@baby-tracker.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+      
+volumes:
+  postgres_data:
+                    </div>
+
+                    <h3>✅ Status Atual do Banco</h3>
+                    <div class="database-schema">
+                        <p><span class="emoji">🟢</span> <strong>6 Tabelas criadas</strong> - Todas funcionando</p>
+                        <p><span class="emoji">🟢</span> <strong>8 ENUMs implementados</strong> - Tipos customizados</p>
+                        <p><span class="emoji">🟢</span> <strong>Relacionamentos 1:N</strong> - Foreign keys configuradas</p>
+                        <p><span class="emoji">🟢</span> <strong>Propriedades calculadas</strong> - duration_minutes, file_size_mb</p>
+                        <p><span class="emoji">🟢</span> <strong>Timestamps automáticos</strong> - created_at, updated_at</p>
+                        <p><span class="emoji">🟢</span> <strong>Dados de teste</strong> - Script test_models.py executado</p>
+                    </div>
+                </div>
+
+                <!-- DevOps Section -->
+                <div class="tab-content devops section">
+                    <h2>🐳 DevOps & Infraestrutura</h2>
+
+                    <h3>🔧 Ferramentas de Desenvolvimento</h3>
+                    <div class="tech-grid">
+                        <div class="tech-card">
+                            <h4>🐳 Docker & Containers</h4>
+                            <p><strong>Docker Compose</strong> - Orquestração local</p>
+                            <p><strong>PostgreSQL Container</strong> - Banco isolado</p>
+                            <p><strong>pgAdmin Container</strong> - Interface gráfica</p>
+                        </div>
+                        <div class="tech-card">
+                            <h4>📝 Controle de Versão</h4>
+                            <p><strong>Git</strong> - Versionamento</p>
+                            <p><strong>GitHub</strong> - Repositório remoto</p>
+                            <p><strong>GitFlow</strong> - Estratégia de branches</p>
+                        </div>
+                        <div class="tech-card">
+                            <h4>🚀 Deploy & Produção</h4>
+                            <p><strong>AWS S3</strong> - Armazenamento fotos</p>
+                            <p><strong>AWS EC2/ECS</strong> - Deploy backend</p>
+                            <p><strong>Vercel/Netlify</strong> - Deploy Flutter web</p>
+                        </div>
+                        <div class="tech-card">
+                            <h4>📊 Monitoramento</h4>
+                            <p><strong>FastAPI Docs</strong> - Swagger automático</p>
+                            <p><strong>pgAdmin</strong> - Monitor banco</p>
+                            <p><strong>Docker Logs</strong> - Debug containers</p>
+                        </div>
+                    </div>
+
+                    <h3>🌟 Estratégia Git Flow</h3>
+                    <div class="architecture-diagram">
+                        <div class="flow-step">feature/auth</div>
+                        <div class="flow-step">develop</div>
+                        <div class="flow-step">main</div>
+                        <div class="flow-step">production</div>
+                    </div>
+
+                    <div class="code-block" data-lang="Git Commands">
+# Fluxo completo Feature → Develop → Main
+git checkout -b feature/feeding
+# ... desenvolvimento ...
+git add . && git commit -m "feat: add feeding registration"
+git push -u origin feature/feeding
+
+# Merge na develop
+git checkout develop && git pull origin develop
+git merge feature/feeding && git push origin develop
+git branch -d feature/feeding
+
+# Deploy para main
+git checkout main && git pull origin main
+git merge develop && git tag v1.1.0
+git push origin main --tags
+                    </div>
+
+                    <h3>🚀 Comandos Úteis Docker</h3>
+                    <div class="code-block" data-lang="Docker">
+# Subir ambiente completo
+cd docker && docker-compose up -d
+
+# Ver logs do PostgreSQL
+docker logs baby_tracker_db
+
+# Entrar no container do banco
+docker exec -it baby_tracker_db psql -U baby_user -d baby_tracker
+
+# Parar tudo
+docker-compose down
+
+# Limpar volumes (reset banco)
+docker-compose down -v
+
+# Rebuild completo
+docker-compose up --build --force-recreate
+                    </div>
+
+                    <h3>📁 Estrutura .gitignore Completa</h3>
+                    <div class="code-block" data-lang="GitIgnore">
+# Flutter/Dart
+.dart_tool/
+.flutter-plugins
+.packages
+.pub-cache/
+build/
+
+# Python/FastAPI
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# Database
+*.sql
+*.dump
+postgres_data/
+
+# AWS & Secrets
+.aws/
+*.pem
+*.key
+jwt_secret_key
+database_password
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+                    </div>
+                </div>
+
+                <!-- Progress Section -->
+                <div class="tab-content progress section">
+                    <h2>📈 Progresso do Projeto</h2>
+
+                    <h3>🏆 Conquistas Atuais</h3>
+                    <div class="timeline">
+                        <div class="timeline-item completed">
+                            <h4>✅ Dia 1 - Setup Inicial (107/120min)</h4>
+                            <p><strong>Tarefas:</strong> Repositório GitHub, Estrutura pastas, Flutter setup, Python ambiente</p>
+                            <p><strong>Resultado:</strong> Base do projeto funcionando localmente</p>
+                        </div>
+                        
+                        <div class="timeline-item completed">
+                            <h4>✅ Dia 2 - Banco de Dados (105/120min)</h4>
+                            <p><strong>Tarefas:</strong> PostgreSQL + Docker, 6 Modelos SQLAlchemy</p>
+                            <p><strong>Resultado:</strong> Banco 100% funcional com dados de teste</p>
+                        </div>
+                        
+                        <div class="timeline-item pending">
+                            <h4>⏳ Dia 3 - APIs & Auth (0/120min)</h4>
+                            <p><strong>Tarefas:</strong> Alembic, JWT Authentication, Feeding API, Flutter HTTP</p>
+                            <p><strong>Status:</strong> Pendente</p>
+                        </div>
+                        
+                        <div class="timeline-item pending">
+                            <h4>⏳ Dia 4 - Frontend UI (0/120min)</h4>
+                            <p><strong>Tarefas:</strong> Navegação, Feeding Form, Lista histórico</p>
+                            <p><strong>Status:</strong> Pendente</p>
+                        </div>
+                        
+                        <div class="timeline-item pending">
+                            <h4>⏳ Dia 5 - Sleep & Dashboard (0/120min)</h4>
+                            <p><strong>Tarefas:</strong> Sleep API, Flutter Sleep UI, Dashboard básico</p>
+                            <p><strong>Status:</strong> Pendente</p>
+                        </div>
+                    </div>
+
+                    <h3>📊 Estatísticas Detalhadas</h3>
+                    <div class="stats">
+                        <div class="stat-card">
+                            <div class="stat-number">6/16</div>
+                            <div class="stat-label">Tarefas Finalizadas</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">37.5%</div>
+                            <div class="stat-label">Progresso Total</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">212min</div>
+                            <div class="stat-label">Tempo Investido</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">388min</div>
+                            <div class="stat-label">Tempo Restante</div>
+                        </div>
+                    </div>
+
+                    <h3>🎯 Próximas Ações</h3>
+                    <div class="highlight">
+                        <h4>Para completar o Dia 2 (15min restantes):</h4>
+                        <p><strong>Configurar Alembic</strong> - Sistema de migrations do banco</p>
+                    </div>
+
+                    <div class="code-block" data-lang="Next Commands">
+# Configurar Alembic (15min)
+cd backend
+alembic init alembic
+alembic revision --autogenerate -m "Initial migration"
+alembic upgrade head
+
+# Testar se funcionou
+python -c "from app.models import User; print('Alembic OK!')"
+                    </div>
+
+                    <h3>🏅 Deliverables Atingidos</h3>
+                    <div class="feature-list">
+                        <p><span class="emoji">✅</span> <strong>Repositório GitHub</strong> - baby-tracker-app configurado</p>
+                        <p><span class="emoji">✅</span> <strong>Estrutura Flutter</strong> - Clean Architecture implementada</p>
+                        <p><span class="emoji">✅</span> <strong>FastAPI Backend</strong> - API respondendo "Hello World"</p>
+                        <p><span class="emoji">✅</span> <strong>PostgreSQL</strong> - Banco rodando via Docker</p>
+                        <p><span class="emoji">✅</span> <strong>6 Modelos</strong> - User, Baby, Feeding, Sleep, Photo, Diaper</p>
+                        <p><span class="emoji">✅</span> <strong>Relacionamentos</strong> - Foreign keys e propriedades calculadas</p>
+                        <p><span class="emoji">⚪</span> <strong>Sistema Migrations</strong> - Alembic (próximo passo)</p>
+                    </div>
+                </div>
+
+                <!-- Learnings Section -->
+                <div class="tab-content learnings section">
+                    <h2>🎓 Aprendizados e Conceitos</h2>
+
+                    <h3>🏛️ Arquitetura e Padrões</h3>
+                    <div class="tech-grid">
+                        <div class="tech-card">
+                            <h4>🎯 Clean Architecture</h4>
+                            <p><strong>Separação de Responsabilidades</strong></p>
+                            <p>• Presentation (UI)</p>
+                            <p>• Domain (Regras negócio)</p>
+                            <p>• Data (Acesso dados)</p>
+                            <p>• Core (Infraestrutura)</p>
+                        </div>
+                        <div class="tech-card">
+                            <h4>🔄 Repository Pattern</h4>
+                            <p><strong>Abstração Acesso Dados</strong></p>
+                            <p>• Interface para dados</p>
+                            <p>• Implementação específica</p>
+                            <p>• Facilita testes</p>
+                            <p>• Troca de data source</p>
+                        </div>
+                        <div class="tech-card">
+                            <h4>🎭 State Management</h4>
+                            <p><strong>Gerenciamento Estado Flutter</strong></p>
+                            <p>• Provider (básico)</p>
+                            <p>• Riverpod (avançado)</p>
+                            <p>• StateNotifier</p>
+                            <p>• Estado imutável</p>
+                        </div>
+                        <div class="tech-card">
+                            <h4>📦 Dependency Injection</h4>
+                            <p><strong>Inversão Dependências</strong></p>
+                            <p>• Desacoplamento</p>
+                            <p>• Testabilidade</p>
+                            <p>• Flexibilidade</p>
+                            <p>• Manutenibilidade</p>
+                        </div>
+                    </div>
+
+                    <h3>💻 Conceitos Técnicos Aplicados</h3>
+                    <div class="feature-list">
+                        <p><span class="emoji">🗃️</span> <strong>ORM (Object-Relational Mapping)</strong> - SQLAlchemy para mapear objetos Python para tabelas SQL</p>
+                        <p><span class="emoji">🔄</span> <strong>Migrations</strong> - Alembic para versionar mudanças no schema do banco</p>
+                        <p><span class="emoji">📝</span> <strong>Type Hints</strong> - Python tipado para melhor desenvolvimento</p>
+                        <p><span class="emoji">✅</span> <strong>Data Validation</strong> - Pydantic para validação automática</p>
+                        <p><span class="emoji">🔐</span> <strong>JWT (JSON Web Tokens)</strong> - Autenticação stateless</p>
+                        <p><span class="emoji">🏷️</span> <strong>ENUMs</strong> - Tipos customizados para domínio específico</p>
+                        <p><span class="emoji">⚡</span> <strong>ASGI</strong> - Async Server Gateway Interface</p>
+                        <p><span class="emoji">🐳</span> <strong>Containerização</strong> - Docker para ambiente isolado</p>
+                    </div>
+
+                    <h3>🚀 Boas Práticas Implementadas</h3>
+                    <div class="highlight">
+                        <h4>🔒 Segurança</h4>
+                        <p>• Hash de senhas com bcrypt</p>
+                        <p>• JWT tokens com expiração</p>
+                        <p>• Validação de dados de entrada</p>
+                        <p>• Environment variables para secrets</p>
+                    </div>
+
+                    <div class="highlight">
+                        <h4>📊 Banco de Dados</h4>
+                        <p>• Relacionamentos bem definidos</p>
+                        <p>• Índices para performance</p>
+                        <p>• Timestamps automáticos</p>
+                        <p>• Propriedades calculadas</p>
+                    </div>
+
+                    <div class="highlight">
+                        <h4>🧹 Código Limpo</h4>
+                        <p>• Nomes descritivos</p>
+                        <p>• Separação de responsabilidades</p>
+                        <p>• Documentação inline</p>
+                        <p>• Estrutura consistente</p>
+                    </div>
+
+                    <h3>🔧 Tecnologias Dominadas</h3>
+                    <div class="tech-grid">
+                        <div class="tech-card">
+                            <h4>📱 Flutter/Dart</h4>
+                            <p>• Widgets stateful/stateless</p>
+                            <p>• Navigation & routing</p>
+                            <p>• State management</p>
+                            <p>• HTTP client integration</p>
+                            <p>• Clean architecture</p>
+                        </div>
+                        <div class="tech-card">
+                            <h4>🐍 Python/FastAPI</h4>
+                            <p>• Async programming</p>
+                            <p>• Type hints avançados</p>
+                            <p>• SQLAlchemy ORM</p>
+                            <p>• Pydantic validation</p>
+                            <p>• JWT authentication</p>
+                        </div>
+                        <div class="tech-card">
+                            <h4>🗃️ PostgreSQL</h4>
+                            <p>• Schema design</p>
+                            <p>• Relacionamentos complexos</p>
+                            <p>• ENUMs customizados</p>
+                            <p>• Índices e performance</p>
+                            <p>• Migrations system</p>
+                        </div>
+                        <div class="tech-card">
+                            <h4>🐳 DevOps</h4>
+                            <p>• Docker containers</p>
+                            <p>• Docker Compose</p>
+                            <p>• Git flow strategies</p>
+                            <p>• Environment management</p>
+                            <p>• CI/CD concepts</p>
+                        </div>
+                    </div>
+
+                    <h3>📚 Recursos de Aprendizado</h3>
+                    <div class="code-block" data-lang="Learning Resources">
+# Documentação Oficial
+- Flutter: https://docs.flutter.dev/
+- FastAPI: https://fastapi.tiangolo.com/
+- SQLAlchemy: https://docs.sqlalchemy.org/
+- PostgreSQL: https://www.postgresql.org/docs/
+
+# Cursos Recomendados
+- Flutter Clean Architecture
+- FastAPI for Beginners
+- PostgreSQL Database Design
+- Docker for Developers
+
+# Livros Técnicos
+- Clean Architecture (Robert Martin)
+- Effective Dart Programming
+- PostgreSQL Up & Running
+- Microservices Patterns
+                    </div>
+
+                    <h3>🎯 Próximos Aprendizados</h3>
+                    <div class="feature-list">
+                        <p><span class="emoji">🧪</span> <strong>Testes Automatizados</strong> - Unit tests, Integration tests</p>
+                        <p><span class="emoji">📊</span> <strong>Observabilidade</strong> - Logs, Metrics, Tracing</p>
+                        <p><span class="emoji">🚀</span> <strong>Performance</strong> - Caching, Database optimization</p>
+                        <p><span class="emoji">☁️</span> <strong>Cloud Native</strong> - Kubernetes, Serverless</p>
+                        <p><span class="emoji">🔐</span> <strong>Security</strong> - OAuth2, Rate limiting</p>
+                        <p><span class="emoji">📱</span> <strong>Mobile Advanced</strong> - Push notifications, Offline sync</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
