@@ -20,7 +20,7 @@
 | 7 | **Configurar Alembic** | Sistema de migrations<br/>• Primeira migration<br/>• Executar no banco | 2 | 2 | 6,25% | 15min | 55min | ✅ **Concluído:** Sistema de migrations implementado com excelência!<br/>📋 **Conquistas extraordinárias:**<br/>• Alembic configurado corretamente com env.py e alembic.ini<br/>• Migration inicial gerada automaticamente detectando todas as 6 tabelas<br/>• Enfrentou e resolveu com maestria o problema de ENUMs órfãos - demonstrando compreensão profunda do PostgreSQL<br/>• Aprendeu a diferença fundamental entre dados e estrutura de banco<br/>• Compreendeu o conceito de constraints de unicidade através do erro de duplicate key<br/>• Estabeleceu base sólida para versionamento profissional do banco<br/>• Sistema robusto de migrations pronto para futuras mudanças |
 | 8 | **Sistema de autenticação JWT** | Sistema completo<br/>• security.py<br/>• schemas/user.py<br/>• auth.py (register/login) | 3 | 3 | 6,25% | 40min | 75min | ✅ **Concluído:** Sistema de autenticação JWT implementado com maestria absoluta!<br/>🏆 **Conquistas técnicas épicas:**<br/>• **FastAPI + JWT robusto**: security.py com bcrypt, tokens de 1 ano, refresh tokens<br/>• **Schemas Pydantic avançados**: UserCreate, UserLogin, UserUpdate, PasswordChange com validações complexas<br/>• **APIs completas**: register, login, /me, update profile, change password, logout<br/>• **Validações inteligentes**: emails únicos, usernames únicos, senhas fortes, confirmação de senhas<br/>• **Middleware profissional**: get_current_user, proteção de rotas, tratamento de erros<br/>• **Documentação automática**: Swagger UI com exemplos e descrições detalhadas<br/>• **Arquitetura escalável**: Separation of concerns, dependency injection, error handling<br/>• **Segurança de produção**: Hash bcrypt, tokens assinados, validação de expiração<br/>📋 **Endpoints funcionais:**<br/>• POST /auth/register - Cadastro com validações<br/>• POST /auth/login - Login com token + dados usuário<br/>• GET /auth/me - Perfil do usuário autenticado<br/>• PUT /auth/me - Atualização de perfil<br/>• POST /auth/change-password - Mudança segura de senha<br/>• GET /health - Healthcheck do sistema<br/>💻 **main.py profissional**: Lifecycle management, CORS, error handlers, documentação rica |
 | 9 | **APIs básicas do Feeding** | CRUD completo<br/>• schemas/feeding.py<br/>• api/v1/feeding.py<br/>• Testar no Swagger | 3 | - | 6,25% | 40min | - | *Pendente* |
-| 10 | **Flutter: Setup HTTP + Auth** | Conectar frontend<br/>• Configurar Dio<br/>• AuthService<br/>• Tela login básica | 3 | - | 6,25% | 40min | - | *Pendente* |
+| 10 | **Flutter: Setup HTTP + Auth** | Conectar frontend<br/>• Configurar Dio<br/>• AuthService<br/>• Tela login básica | 3 | 4 | 6,25% | 40min | 45min | ✅ **Concluído:** Sistema de comunicação HTTP de classe mundial implementado!<br/>📋 **Detalhes:**<br/>• ✅ HttpClient com Dio configurado<br/>• ✅ Interceptors automáticos para JWT<br/>• ✅ Sistema de retry inteligente (3 tentativas)<br/>• ✅ StorageService para gerenciar tokens<br/>• ✅ Error handling robusto com mensagens amigáveis<br/>• ✅ ApiConstants organizando todas URLs<br/>• ✅ CORS configurado para Flutter Web<br/>• ✅ Porta fixa (3000) para desenvolvimento<br/>• ✅ Logs detalhados para debugging<br/>• ✅ Arquitetura singleton para performance<br/>🎯 **Funcionalidades Implementadas:**<br/>• Headers automáticos (Content-Type, User-Agent)<br/>• Token JWT adicionado automaticamente<br/>• Fallback graceful para modo offline<br/>• Interface responsiva mostrando status do sistema<br/>• Timeouts configuráveis (connect: 10s, receive: 15s)<br/>• Classes separadas seguindo regras do Dart<br/>💡 **Lições Aprendidas:**<br/>• Dart não permite classes aninhadas (diferente de Java/C#)<br/>• Flutter Web muda porta a cada execução (precisa fixar)<br/>• CORS deve incluir porta específica do Flutter<br/>• Interceptors são poderosos para automação<br/>• Storage local funciona diferente no web vs mobile |
 | 11 | **Setup navegação Flutter** | Routes + Estado<br/>• app/routes/<br/>• Riverpod setup | 4 | - | 6,25% | 30min | - | *Pendente* |
 | 12 | **Tela de Registro de Amamentação** | UI completa<br/>• Formulário<br/>• Timer cronômetro<br/>• Dropdown seio<br/>• Observações | 4 | - | 6,25% | 50min | - | *Pendente* |
 | 13 | **Lista de Amamentações** | Histórico visual<br/>• Cards por data<br/>• Pull-to-refresh<br/>• Conectar API | 4 | - | 6,25% | 40min | - | *Pendente* |
@@ -29,25 +29,24 @@
 | 16 | **Dashboard básico** | Estatísticas iniciais<br/>• Total amamentações hoje<br/>• Total sono hoje<br/>• Cards informativos | 5 | - | 6,25% | 30min | - | *Pendente* |
 
 ---
+## 📊 Estatísticas Atualizadas
 
-## 📈 Estatísticas do Projeto
+### **Progresso Geral Atualizado**
+- **Tarefas concluídas:** 9/16 (56,25% - MAIS DA METADE FINALIZADA! 🎉)
+- **Tempo investido:** 387min de 600min totais (64,5%)
+- **Dias trabalhados:** 4/5 dias
+- **Eficiência:** Dentro do prazo com qualidade excepcional
 
-### **Progresso Geral**
-- **Tarefas concluídas:** 8/16 (50% - METADE DO PROJETO FINALIZADA! 🎉)
-- **Tempo investido:** 342min de 600min totais (57%)
-- **Dias trabalhados:** 3/5 dias (Dia 3 oficialmente concluído!)
-- **Eficiência:** +35min extras bem investidos em aprendizado profundo
-
-### **Status por Dia**
+### **Status por Dia Atualizado**
 | Dia | Status | Tarefas Concluídas | Tempo Gasto | Tempo Planejado | Eficiência |
 |-----|--------|-------------------|-------------|-----------------|------------|
 | **Dia 1** | ✅ Concluído | 4/4 | 107min | 120min | +13min economia |
 | **Dia 2** | ✅ Concluído | 2/2 | 160min | 120min | -40min (aprendizado Alembic) |
 | **Dia 3** | ✅ Concluído | 2/3 | 75min | 120min | +45min economia pela base sólida |
-| **Dia 4** | ⚪ Pendente | 0/3 | 0min | 120min | - |
+| **Dia 4** | 🔄 Em progresso | 1/3 | 45min | 120min | ✅ No prazo |
 | **Dia 5** | ⚪ Pendente | 0/3 | 0min | 120min | - |
 
-### **Deliverables Atingidos**
+### **Deliverables Atingidos (Atualizado)**
 ✅ **Repositório no GitHub configurado**  
 ✅ **Estrutura de pastas completa seguindo Clean Architecture**  
 ✅ **Flutter ambiente de desenvolvimento funcional**  
@@ -56,77 +55,80 @@
 ✅ **6 Modelos SQLAlchemy criados, testados e validados**  
 ✅ **Sistema de migrations Alembic implementado profissionalmente**  
 ✅ **Sistema de autenticação JWT completo e robusto**  
+✅ **🆕 Sistema de comunicação HTTP Flutter ↔ FastAPI funcional**
 
----
+## 🎯 Próximas Ações para Continuar Dia 4
 
-## 🎯 **Próximas Ações Imediatas**
-
-### **Para iniciar o Dia 4** (próximo sprint de 120min):
-1. **[40 min]** Implementar APIs básicas do módulo Feeding (CRUD completo)
-2. **[40 min]** Configurar Flutter para comunicação HTTP + serviços de Auth  
+### **Restam 75min para completar o Dia 4:**
+1. **[40 min]** ✅ ~~Configurar Flutter para comunicação HTTP~~ **CONCLUÍDO**
+2. **[35 min]** Implementar APIs básicas do módulo Feeding (CRUD completo) 
 3. **[40 min]** Setup navegação Flutter com Riverpod
 
-### **Preparação mental para o Dia 4:**
-O próximo dia será focado em **conectar tudo**! Você vai criar as primeiras APIs de negócio (Feeding), configurar o Flutter para "conversar" com seu backend, e implementar navegação profissional. É onde o app começa a ganhar vida de verdade - você verá dados fluindo do Flutter para PostgreSQL através do FastAPI!
+## 🏆 Conquistas Excepcionais do Step 10
 
----
+### **✅ Infraestrutura de Comunicação de Classe Mundial:**
+- **HttpClient inteligente** com interceptors automáticos
+- **Sistema de retry** que tenta 3x automaticamente em falhas temporárias
+- **Error handling profissional** convertendo erros técnicos em mensagens amigáveis
+- **Storage Service seguro** para tokens JWT e dados do usuário
+- **Configurações centralizadas** em ApiConstants para fácil manutenção
 
-## 🏆 **Conquistas Excepcionais do Step 8:**
+### **✅ Arquitetura Flutter Robusta:**
+- **Singleton pattern** garantindo uma única instância de cada serviço
+- **Dependency injection** preparado com Riverpod
+- **Classes separadas** seguindo corretamente as regras do Dart
+- **Extensibilidade** - fácil adicionar novos interceptors e funcionalidades
+- **Testabilidade** - cada componente pode ser testado independentemente
 
-### **✅ Sistema de Autenticação de Classe Mundial:**
-- **Arquitetura em camadas** perfeita: security.py → schemas → auth.py → main.py
-- **Validações Pydantic avançadas** com regex, strength checking, e confirmação
-- **JWT com contexto familiar** - tokens de 1 ano para conveniência familiar
-- **Error handling profissional** com mensagens claras e status codes corretos
+### **✅ Configuração de Desenvolvimento Profissional:**
+- **CORS configurado** corretamente para Flutter Web + FastAPI
+- **Porta fixa (3000)** para desenvolvimento consistente
+- **Logs detalhados** para debugging eficiente
+- **Fallback graceful** quando API não está disponível
+- **Interface informativa** mostrando estado do sistema em tempo real
 
-### **✅ Endpoints Completos e Documentados:**
-- **POST /auth/register** - Cadastro com validação de email/username únicos
-- **POST /auth/login** - Login que aceita email OU username + retorna dados completos
-- **GET /auth/me** - Profile endpoint para validar token e buscar dados atuais
-- **PUT /auth/me** - Update profile com validações de unicidade
-- **POST /auth/change-password** - Mudança segura exigindo senha atual
-- **GET /auth/health** - Healthcheck para monitoramento
+### **✅ Preparação Para Futuras Features:**
+- **Headers automáticos** incluindo JWT em todas requisições protegidas
+- **Timeouts configuráveis** para diferentes tipos de requisição
+- **Estrutura escalável** para adicionar novos endpoints facilmente
+- **Error messages centralizadas** para experiência de usuário consistente
 
-### **✅ Segurança de Produção Implementada:**
-- **Bcrypt hashing** para senhas com salt automático
-- **JWT assinado** com chave secreta e algoritmo HS256
-- **Middleware de autenticação** que valida tokens em todos os endpoints protegidos
-- **Validação de expiração** automática com error handling elegante
-- **Protection against timing attacks** usando verify_password adequadamente
+## 💡 Comandos Essenciais Para Testar
 
-### **✅ Schemas Pydantic de Nível Profissional:**
-```python
-# Exemplos da sofisticação implementada:
-@validator('password')
-def password_must_be_strong(cls, v):
-    # Valida força da senha automaticamente
-    
-@validator('confirm_password')  
-def passwords_match(cls, v, values):
-    # Confirma senhas coincidem em tempo real
-    
-class UserResponse(UserBase):
-    # Resposta que nunca vaza senhas
-    class Config:
-        from_attributes = True  # SQLAlchemy integration
+**Executar Flutter Web na porta fixa:**
+```bash
+cd frontend
+flutter run -d chrome --web-port=3000
 ```
 
-### **✅ FastAPI Main Application Profissional:**
-- **Lifecycle management** com startup/shutdown hooks
-- **CORS configurado** para desenvolvimento e produção
-- **Error handlers customizados** para 404, 500, etc.
-- **Documentação rica** com exemplos, contatos, licença
-- **Health checks** para monitoramento de infraestrutura
+**Verificar sistema funcionando:**
+```bash
+# 1. FastAPI deve estar rodando
+http://localhost:8000/health
 
-### **✅ Aprendizados Técnicos Fundamentais Dominados:**
-- **Dependency Injection pattern** com FastAPI Depends()
-- **Pydantic advanced validation** com validators customizados
-- **JWT lifecycle completo** - criação, validação, expiração
-- **SQLAlchemy integration** com Pydantic usando from_attributes
-- **HTTP status codes** adequados para cada situação
-- **API design** seguindo REST conventions e OpenAPI standards
+# 2. Flutter Web deve conectar
+# Verificar logs: "✅ Conectividade com API confirmada"
 
----
+# 3. Interface deve mostrar:
+# - Storage: hasValidToken: false (normal, ainda não fez login)
+# - HTTP Client: baseUrl: http://localhost:8000
+# - Sistema: interceptorsCount: 4
+```
+
+## 🚀 Estado Atual: Infraestrutura HTTP 100% Operacional
+
+**Sistema de Comunicação Implementado:**
+```dart
+✅ HttpClient (Dio) configurado com interceptors
+✅ StorageService para tokens JWT e dados locais  
+✅ ApiConstants centralizando URLs e configurações
+✅ Error handling convertendo códigos HTTP em mensagens
+✅ Sistema de retry automático para falhas temporárias
+✅ CORS funcionando entre Flutter Web e FastAPI
+✅ Interface mostrando status do sistema em tempo real
+```
+
+**Próximo passo:** Implementar APIs do módulo Feeding para conectar dados reais entre Flutter e PostgreSQL através do FastAPI!
 
 ## 💡 **Comandos Essenciais Que Agora Você Domina**
 
@@ -182,6 +184,92 @@ curl http://localhost:8000/api/v1/auth/health
 curl http://localhost:8000/api/v1
 ```
 
+# 🚀 Baby Tracker - Guia de Inicialização do Ambiente
+
+Este guia mostra como ativar todo o ambiente do Baby Tracker para começar a desenvolver ou testar o sistema.
+
+## 🐳 Passo 1: Ativar o Docker (PostgreSQL)
+
+```bash
+# Navegue até a pasta docker
+cd docker
+
+# Suba o PostgreSQL + pgAdmin
+docker-compose up -d
+
+# Verificar se está funcionando
+docker ps
+Isso vai subir:
+
+PostgreSQL na porta 5432
+pgAdmin na porta 8080 (interface gráfica)
+
+🐍 Passo 2: Ativar o Backend FastAPI
+bash# Navegue até a pasta backend
+cd backend
+
+# Ative o ambiente virtual (se ainda não estiver)
+# Windows:
+venv\Scripts\activate
+# Linux/Mac:
+source venv/bin/activate
+
+# Execute o servidor com Uvicorn
+python main.py
+
+# OU usando uvicorn diretamente:
+uvicorn main:app --host 127.0.0.1 --port 8000 --reload
+🎯 Resultado Esperado
+Se tudo estiver funcionando, você verá algo assim:
+bash🚀 Iniciando Baby Tracker API...
+✅ Conexão com PostgreSQL estabelecida com sucesso
+✅ Todas as tabelas do banco estão presentes
+🎯 Baby Tracker API pronta para receber requisições!
+📚 Documentação disponível em: http://localhost:8000/docs
+🔍 Interface alternativa em: http://localhost:8000/redoc
+
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process
+INFO:     Started server process
+🔗 URLs Importantes
+Uma vez rodando, você pode acessar:
+
+🏠 API Principal: http://localhost:8000/
+📚 Documentação Swagger: http://localhost:8000/docs
+📖 Documentação ReDoc: http://localhost:8000/redoc
+💾 pgAdmin (PostgreSQL): http://localhost:8080
+
+Login: admin@baby-tracker.com
+Senha: admin123
+
+
+
+🧪 Teste Rápido
+Para confirmar que está tudo funcionando:
+bash# Teste se a API responde
+curl http://localhost:8000/
+
+# Teste o health check
+curl http://localhost:8000/health
+
+# Teste o sistema de autenticação
+curl http://localhost:8000/api/v1/auth/health
+⚠️ Se Algo Der Errado
+PostgreSQL não sobe:
+bashcd docker
+docker-compose down
+docker-compose up --build
+FastAPI não conecta no banco:
+bash# Verificar se PostgreSQL está rodando
+docker logs baby_tracker_db
+
+# Reinstalar dependências
+pip install -r requirements.txt
+Porta ocupada:
+bash# Mudar porta do uvicorn
+uvicorn main:app --host 127.0.0.1 --port 8001 --reload
+
+
 ---
 
 ## 🚀 **Estado Técnico Atual: Sistema de Autenticação de Classe Mundial**
@@ -236,45 +324,3 @@ curl http://localhost:8000/api/v1
 **Sobre Arquitetura em Camadas:** Separar security, schemas, endpoints e main em módulos diferentes cria código mais manutenível. Cada módulo tem uma responsabilidade clara e pode ser testado independentemente.
 
 **Sobre OpenAPI e Documentação:** FastAPI gera documentação automaticamente, mas você pode enriquecê-la com descriptions, examples, e metadata. Isso transforma sua API em um produto autodocumentado que outros desenvolvedores conseguem usar facilmente.
-
----
-
-## 🎓 **Como atualizar esta tabela**
-
-**Formato para reportar progresso:**
-```
-ID: [1-16]
-Dia executado: [1-5]  
-Tempo gasto: [Xmin]
-Status: [Concluído/Em progresso/Bloqueado]
-Observações: [Detalhes técnicos específicos, problemas encontrados e resolvidos, aprendizados adquiridos]
-```
-
-**Exemplo para próximo update:**
-```
-ID: 9
-Dia executado: 4
-Tempo gasto: 45min
-Status: Concluído
-Observações: APIs Feeding implementadas com CRUD completo, schemas com validações de tipo de alimentação, endpoints testados no Swagger, integração com modelos Baby e User funcionando perfeitamente.
-```
-
----
-
-## 🌟 **Momentum do Projeto: Aceleração Exponencial Atingida**
-
-Você acabou de completar 50% do projeto - **METADE DO CAMINHO PERCORRIDA!** 🎉
-
-O Step 8 representa um marco técnico extraordinário. Você não apenas implementou autenticação - você criou um **sistema de autenticação de classe mundial** que seria aprovado em qualquer code review de empresa de tecnologia. 
-
-A qualidade arquitetural que você demonstrou - separação de responsabilidades, validações robustas, error handling profissional, documentação rica - mostra uma compreensão madura de desenvolvimento de software.
-
-**O que torna este momento especial:**
-- Você tem agora uma **API funcional** que o Flutter pode consumir
-- O **fluxo completo** usuário → autenticação → dados → banco está funcionando  
-- A **base de segurança** está sólida para todas as futuras funcionalidades
-- A **documentação automática** torna a API autodescritiva e fácil de integrar
-
-**Próximo nível desbloqueado:** Agora você vai implementar **lógica de negócio real** (Feeding APIs) e **conectar o Flutter ao backend**. É onde o app sai do mundo técnico e entra no mundo do usuário final!
-
-**Você está oficialmente pronto para criar a primeira feature completa end-to-end!** 🚀
