@@ -1,3 +1,5 @@
+import datetime
+import logging
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -10,6 +12,7 @@ from app.api.v1.auth import router as auth_router
 from fastapi.responses import JSONResponse
 import uvicorn
 from contextlib import asynccontextmanager
+from sqlalchemy import text 
 
 
 
@@ -131,7 +134,8 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",    # Flutter web em desenvolvimento
         "http://127.0.0.1:3000",   # Alternativa localhost
-        "http://localhost:8080",   # Possível porta alternativa
+        "http://localhost:8080",
+        "http://localhost:52975",
         # Em produção, adicionar domínios específicos:
         # "https://baby-tracker.app", 
         # "https://www.baby-tracker.app"
@@ -192,26 +196,34 @@ async def root():
     }
 
 
+# Configure logging para debug
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 @app.get("/health", tags=["System"])
 async def health_check():
     """
-    Health check - verifica se todos os sistemas estão funcionando.
-    
-    Útil para:
-    - Monitoramento automatizado
-    - Load balancers verificarem se servidor está saudável
-    - Debugging de problemas de infraestrutura
+    Health check com logging detalhado para debug.
     """
+    logger.info("🏥 Iniciando health check...")
+    
     try:
-        # Testa conexão com banco
+        logger.info("🔗 Tentando obter sessão do banco...")
         db = next(get_db())
-        db.execute("SELECT 1")  # Query simples para testar
-        db.close()
+        logger.info("✅ Sessão do banco obtida com sucesso")
         
-        return {
+        logger.info("📊 Executando query de teste...")
+        result = db.execute(text("SELECT 1")).fetchone()
+        logger.info(f"✅ Query executada com sucesso: {result}")
+        
+        logger.info("🔒 Fechando sessão do banco...")
+        db.close()
+        logger.info("✅ Sessão fechada com sucesso")
+        
+        response_data = {
             "status": "healthy",
             "service": "baby-tracker-api",
-            "timestamp": "2024-01-15T10:30:00Z",  # Em produção, usar datetime real
+            "timestamp": datetime.datetime.now().isoformat(),  # Em produção, usar datetime real,
             "checks": {
                 "database": "✅ PostgreSQL conectado",
                 "authentication": "✅ JWT funcionando", 
@@ -219,18 +231,29 @@ async def health_check():
             }
         }
         
+        logger.info(f"🎉 Health check concluído com sucesso: {response_data}")
+        return response_data
+        
     except Exception as e:
+        logger.error(f"❌ Erro no health check: {type(e).__name__}: {str(e)}")
+        logger.error(f"📍 Traceback completo:", exc_info=True)
+        
         # Se algo der errado, retorna erro 503 (Service Unavailable)
+        error_detail = {
+            "status": "unhealthy",
+            "error": f"{type(e).__name__}: {str(e)}",
+            "error_type": type(e).__name__,
+            "checks": {
+                "database": "❌ Erro na conexão",
+                "api": "⚠️  Funcional com limitações"
+            }
+        }
+        
+        logger.error(f"🚨 Retornando erro 503: {error_detail}")
+        
         raise HTTPException(
             status_code=503,
-            detail={
-                "status": "unhealthy",
-                "error": str(e),
-                "checks": {
-                    "database": "❌ Erro na conexão",
-                    "api": "⚠️  Funcional com limitações"
-                }
-            }
+            detail=error_detail
         )
 
 
